@@ -16,6 +16,7 @@ export class FormComponent implements OnInit {
   inputDataObj:any;
   title:any;
   apiUrl='http://10.2.60.130:8487/api/india/onlineapi/'
+  stateName:any=[]
 
   searchForm:FormGroup=new FormGroup({
     name:new FormControl('',Validators.required),
@@ -28,6 +29,13 @@ export class FormComponent implements OnInit {
   startdate:new FormControl(new Date())
   })
   ngOnInit(): void {
+  }
+
+  getState(){
+    this.http.get('url').subscribe(el=>{
+      console.log(el)
+      this.stateName=el
+    })
   }
 
 
