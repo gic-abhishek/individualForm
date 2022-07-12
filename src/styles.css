@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
+*{
+    font-family: Arial, Helvetica, sans-serif;
+   
+
+}
 .k-theme-test-class,
 .k-common-test-class {
     opacity: 0;
