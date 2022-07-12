@@ -1,7 +1,7 @@
 
 <kendo-card width="100%">
   <kendo-card-header>
-    <h3>Document Detail Report</h3>
+    <h3>Online Engine</h3>
   </kendo-card-header>
   <kendo-card-body>
     <form [formGroup]="searchForm" class="k-form">
@@ -13,11 +13,11 @@
           </div>
 
           <div class="cols">
-            <kendo-textbox placeholder="Din" formControlName="din">
+            <kendo-textbox placeholder="DIN" formControlName="din">
             </kendo-textbox>
           </div>
           <div class="cols">
-            <kendo-datepicker placeholder="DOB *" formControlName="dob"></kendo-datepicker>
+            <kendo-datepicker placeholder="DOB *" (valueChange)="age18Check($event)" formControlName="dob"></kendo-datepicker>
           </div>
           <div class="cols">
             <kendo-textbox placeholder="Contexts" formControlName="contexts">
@@ -43,7 +43,7 @@
               </kendo-combobox> -->
             </div>
             <div class="cols">
-              <kendo-datepicker placeholder="Start Date*" formControlName="startdate"></kendo-datepicker>
+              <kendo-datepicker placeholder="Start Date" formControlName="startdate"></kendo-datepicker>
             </div>
           </div>
   
@@ -65,14 +65,14 @@
         <ng-template kendoPanelBarContent>
       <table id="customers">   
         <tr *ngFor="let data of getValueLoop(item.value)| keyvalue">
-          <th>
+          <th style=" width: 400px;">
             {{data.key}}
           </th>
           <td >
             <span >
               {{checkValueObj(data.value) ==  '[object Object]'?'':checkValueObj(data.value)}}
             </span>         
-            <button *ngIf="checkValueObj(data.value) == '[object Object]'" type="button" (click)="openDialog(data.value,data.key)">View</button>
+            <button kendoButton *ngIf="checkValueObj(data.value) == '[object Object]'" [primary]="true" type="button" (click)="openDialog(data.value,data.key)">View</button>
           </td>
 
         </tr>
@@ -104,3 +104,16 @@
     </table>  
      
     </kendo-dialog>
+
+
+    <kendo-dialog
+    title="Message"
+    *ngIf="openedDialog"
+    (close)="close('cancel')"
+    [minWidth]="250"
+    [width]="450"
+  >
+  <p style="text-align: center">{{message}}</p>
+   
+  </kendo-dialog>
+
