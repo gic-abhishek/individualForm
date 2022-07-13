@@ -15,14 +15,11 @@ export class FormComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
   allData: any = []
-  public min: Date = new Date("2020.01.01 13:02");
-
-  public max: Date = new Date("2020.01.01 12:01");
   public opened = false;
   openedDialog: boolean = false;
   inputDataObj: any;
   title: any;
-  apiUrl = 'http://10.2.60.130:8487/api/india/onlineapi/'
+  apiUrl = 'http://10.250.6.106:8299/api/india/onlineapi/'
   stateName: any = []
 
   searchForm: FormGroup = new FormGroup({
@@ -38,12 +35,12 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getState() {
-    this.http.get('url').subscribe(el => {
-      console.log(el)
-      this.stateName = el
-    })
-  }
+  // getState() {
+  //   this.http.get('url').subscribe(el => {
+  //     console.log(el)
+  //     this.stateName = el
+  //   })
+  // }
 
 
   getValueLoop(item: any) {
@@ -105,12 +102,10 @@ export class FormComponent implements OnInit {
       startdate:this.searchForm.value.startdate
 
     }
-    console.log(obj)
 
-
-    this.http.post(this.apiUrl, obj).subscribe(el => {
-      this.allData = el
-      if (this.allData.length === 0) {
+    this.http.post(this.apiUrl, obj).subscribe((el:any) => {
+      this.allData = el.response
+      if (el.response === 0) {
         this.openedDialog = true;
         this.message = "No Data Found"
       }
